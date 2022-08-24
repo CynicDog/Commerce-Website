@@ -18,7 +18,8 @@ public class ProductCategory {
     @Column(name = "category_name")
     private String categoryName;
 
-    @Column(name = "products")
+    // A category has many products
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @Column(name = "products")
     private Set<Product> products;
 }

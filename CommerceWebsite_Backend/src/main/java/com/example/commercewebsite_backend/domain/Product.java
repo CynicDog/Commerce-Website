@@ -18,6 +18,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Many products belong to a category
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
