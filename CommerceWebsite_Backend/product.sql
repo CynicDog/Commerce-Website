@@ -1,8 +1,6 @@
-CREATE USER 'ecommerceapp'@'localhost' IDENTIFIED BY 'ecommerceapp';
+CREATE USER 'ecommerceapp'@'localhost' IDENTIFIED BY 'EcommerceApp12!';
 
 GRANT ALL PRIVILEGES ON * . * TO 'ecommerceapp'@'localhost';
-
-ALTER USER 'ecommerceapp'@'localhost' IDENTIFIED WITH mysql_native_password BY 'EcommerceApp12';
 
 ALTER USER 'ecommerceapp'@'localhost' IDENTIFIED WITH mysql_native_password BY 'EcommerceApp12!';
 
