@@ -46,16 +46,10 @@ public class RestConfig implements RepositoryRestConfigurer {
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedActions))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedActions));
 
-        exposeIds(config);
-    }
-
-    private void exposeIds(RepositoryRestConfiguration config) {
-
         Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
 
         List<Class> entityClasses = new ArrayList<>();
-        for (EntityType entityType : entities) { entityClasses.add(entityType.getJavaType()); }
-
+        for (EntityType entity: entities) { entityClasses.add(entity.getJavaType()); }
         Class[] domainType = entityClasses.toArray(new Class[0]);
 
         config.exposeIdsFor(domainType);
