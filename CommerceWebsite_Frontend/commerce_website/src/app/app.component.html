@@ -7,24 +7,9 @@
         <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
       </a>
     </div>
-    <div class="menu-sidebar-content js-scrollbar1">
-      <nav class="navbar-sidebar">
-        <ul class="list-unstyled navbar-list">
-          <li>
-            <a href="#">Philosophy</a>
-          </li>
-          <li>
-            <a href="#">History</a>
-          </li>
-          <li>
-            <a href="#">Technology</a>
-          </li>
-          <li>
-            <a href="#">Literature</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+
+    <app-product-category-menu> </app-product-category-menu> 
+    
   </aside>
   <!-- END MENU SIDEBAR-->
 
@@ -52,8 +37,9 @@
       </div>
     </header>
     <!-- END HEADER DESKTOP-->
+    
     <!-- MAIN CONTENT  -->
-    <app-product-list> </app-product-list>
+    <router-outlet> </router-outlet>
 
   </div>
 </div>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '../common/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
+import { ProductCategory } from '../common/product-category';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,33 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getProductList(): Observable<Product[]> { 
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
+  getProductList(categoryId: number): Observable<Product[]> { 
+
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`; 
+
+    return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
       map(response => response._embedded.products)
+    );
+  } 
+
+  getProductCategories(): Observable<ProductCategory[]> { 
+
+    const categoryUrl = "http://localhost:8080/api/productCategory"; 
+
+    return this.httpClient.get<GetResponseCategory>(categoryUrl).pipe(
+      map(response => response._embedded.productCategory)
     );
   } 
 }
 
-interface GetResponse { 
+interface GetResponseProducts { 
   _embedded: { 
     products: Product[]; 
+  }
+}
+
+interface GetResponseCategory { 
+  _embedded: { 
+    productCategory: ProductCategory[]; 
   }
 }
