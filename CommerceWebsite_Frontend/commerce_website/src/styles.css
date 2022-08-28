@@ -735,7 +735,7 @@ table.table.table-bordered th{
     border-color:#0da8e4!important
 }
 a.primary-btn{
-    background:#05143f;
+    background:#839AA8;
     padding:7px 20px;
     text-align:center;
     display:inline-block;
@@ -745,7 +745,7 @@ a.primary-btn{
     margin-top:5px
 }
 a.primary-btn:hover{
-    background:#0da8e4;
+    background:#635666;
     color:#fff
 }
 
