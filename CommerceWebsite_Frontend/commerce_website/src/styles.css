@@ -96,7 +96,7 @@ a,a:hover{
     -webkit-transition:all .3s ease;
     -o-transition:all .3s ease;
     -moz-transition:all .3s ease;
-    transition:all .3s ease
+    transition:all .7s ease
 }
 
 /*Layout Css*/
@@ -290,7 +290,8 @@ input.au-input.au-input-xl{
 }
 
 .au-btn-submit:hover{
-    background:#635666
+    background:#635666;
+    transition:all .7s ease
 }
 
 .au-btn-submit>i{
@@ -720,6 +721,11 @@ table.table.table-bordered th{
 }
 .detail-section{
     margin-top:60px
+}
+
+.detail-img{
+    width: 25%;
+    padding: 25px
 }
 /**/
 
