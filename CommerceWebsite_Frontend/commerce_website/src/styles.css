@@ -104,6 +104,21 @@ a,a:hover{
     padding:0 35px
 }
 
+ngb-pagination > ul { 
+    justify-content: center;
+}
+
+ngb-pagination > ul > .page-item .page-link { 
+    color: #839AA8; 
+    background-color: white; 
+}
+
+ngb-pagination > ul > .page-item.active .page-link { 
+    color: white; 
+    background-color: #839AA8; 
+    border-color: #635666; 
+}
+
 .page-wrapper{
     overflow:hidden;
     background:#F9F9F9;
@@ -979,7 +994,7 @@ footer ul li{
         text-align:center
     }
     .product-box{
-        text-align:centerg
+        text-align:center
     }
     .page-container{
         position:relative;
