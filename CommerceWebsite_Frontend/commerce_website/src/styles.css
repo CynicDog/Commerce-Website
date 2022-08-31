@@ -741,12 +741,16 @@ table.table.table-bordered th{
     color:#635666
 }
 .detail-section{
-    margin-top:60px
+    margin-top: 100px;
+    margin-bottom: 4rem;
+    padding-left: 3rem;
+    padding-right: 3rem; 
 }
 
 .detail-img{
-    width: 25%;
-    padding: 25px
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
 }
 /**/
 
@@ -1062,7 +1066,7 @@ footer ul li{
         text-align:center
     }
     .product-box{
-        text-align:center
+        text-align:none;
     }
     .page-container{
         position:relative;

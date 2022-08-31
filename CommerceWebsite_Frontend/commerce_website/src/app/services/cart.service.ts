@@ -54,7 +54,7 @@ export class CartService {
   }
 
   computeCartTotals() {
-    
+
     let totalPrice: number = 0.00; 
     let totalQuantity: number = 0; 
 
@@ -68,4 +68,3 @@ export class CartService {
   }
 
 }
- 
