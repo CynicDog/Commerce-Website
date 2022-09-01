@@ -23,15 +23,7 @@
                                 <label class="mx-3" for="quantity">Quantity:
                                 <input type="number" list="quantity" #quantityOptionValue (input)="setQuantity(cartItem, +quantityOptionValue.value)" placeholder="{{ cartItem.quantity }} (current)" min="1"/>
                                 <datalist id="quantity">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
+                                    <option *ngFor="let quantity of quantities"> {{ quantity }}</option>
                                 </datalist>
                             </label>
                             </div>

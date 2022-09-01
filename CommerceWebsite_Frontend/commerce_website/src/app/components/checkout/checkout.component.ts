@@ -59,8 +59,20 @@ export class CheckoutComponent implements OnInit {
 
     });
 
-    this.customFormService.getCreditCardMonths(); 
-    this.customFormService.getCreditCardMonths(); 
+    let startMonth: number = new Date().getMonth() + 1; 
+    
+    this.customFormService.getCreditCardMonths(startMonth).subscribe(
+      data => { 
+        this.creditCardMonths = data; 
+      }
+    );
+
+    this.customFormService.getCreditCardYears().subscribe(
+      data => { 
+        this.creditCardYears = data; 
+      }
+    );
+
 
     this.updateCartStatus();
   }
@@ -86,5 +98,28 @@ export class CheckoutComponent implements OnInit {
      else { 
       this.checkoutFormGroup.controls['billingAddress'].reset(); 
      }
+  }
+
+  handleMonthsAndYears() { 
+    
+    const currentYear: number = new Date().getFullYear(); 
+    const selectedYear: number = Number(this.checkoutFormGroup.controls['creditCard'].value.expirationYear); 
+  
+    let startMonth: number; 
+
+    if (currentYear == selectedYear) { 
+      startMonth = new Date().getMonth() + 1; 
+    }
+
+    else { 
+      startMonth = 1; 
+    }
+
+    this.customFormService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+
+        this.creditCardMonths = data; 
+      }
+    )
   }
 }

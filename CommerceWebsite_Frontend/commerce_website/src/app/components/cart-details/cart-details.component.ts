@@ -15,10 +15,13 @@ export class CartDetailsComponent implements OnInit {
   totalPrice: number = 0; 
   totalQuantity: number = 0;
 
+  quantities: number[] = []; 
+
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     this.ListCardDetails();
+    this.optionQuantity();
   }
 
   ListCardDetails() {
@@ -36,5 +39,16 @@ export class CartDetailsComponent implements OnInit {
 
   remove(cartItem: CartItem) { 
     this.cartService.remove(cartItem); 
+  }
+
+  optionQuantity() { 
+
+    let data: number[] = [];
+    
+    for (let i: number = 1; i <= 10; i++) { 
+      data.push(i); 
+    }
+
+    this.quantities = data;
   }
 }
