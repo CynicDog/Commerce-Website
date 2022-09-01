@@ -529,7 +529,7 @@ input.au-input.au-input-xl{
     background:#fff
 }
 .main-content.page-m{
-    padding:10% 15%!important
+    padding:10% 30% 10% 5%
 }
 
 /* 
@@ -581,18 +581,16 @@ input.au-input.au-input-xl{
  */
 
 .form-area{
-    background:#e5e5e5;
+    background: white;
     position:relative;
-    margin-bottom:45px;
-    padding:50px 20px;
-    border:3px solid #ccc
+    margin-top: 1rem;
+    margin-bottom:3rem;
+    padding:20px 20px;
+    box-shadow: 5px 10px 20px #0000003b; 
 }
+
 .form-area h3{
-    position:absolute;
-    top:-26px;
-    left:13px;
-    background:#e5e5e5;
-    padding:10px 20px;
+    padding:20px 20px 45px 20px;
     font-weight:500;
     z-index:23;
     display:inline-block

@@ -46,10 +46,14 @@
 
                     <tr>
                         <td colspan="2"></td>
-                        <td style="font-weight: bold">
+                        <td style="font-weight: bold; position:relative;">
                             <p>Total Quantity: {{ totalQuantity}}</p>
                             <p>Shipping fee: FREE</p>
-                            <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
+                            <p style="padding-bottom: 3rem;">Total Price: {{ totalPrice | currency: 'USD' }}</p>                         
+
+                            <div class="col" routerLink="/checkout"
+                                style="position: absolute; bottom: 0; right: 0;"><button
+                                    class="btn btn-primary btn-sm">Checkout</button></div>
                         </td>
                     </tr>
                 </table>
