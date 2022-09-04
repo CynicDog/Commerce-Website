@@ -115,8 +115,6 @@ export class CheckoutComponent implements OnInit {
     
     this.cartService.totalPrice.subscribe(data => this.totalPrice = data); 
     this.cartService.totalQuantity.subscribe(data => this.totalQuantity = data);
-
-    this.cartService.computeCartTotals();
   }
 
   onSubmit() { 
@@ -165,6 +163,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getStates(formGroupName: string) { 
+
     const formGroup = this.checkoutFormGroup.get(formGroupName); 
     const countryCode = formGroup?.value.country.code; 
 
