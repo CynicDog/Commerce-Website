@@ -39,10 +39,14 @@ public class RestConfig implements RepositoryRestConfigurer {
                 HttpMethod.PUT
         };
 
-        disableHttpMethods(Product.class, config, unsupportedActions);
-        disableHttpMethods(ProductCategory.class, config, unsupportedActions);
-        disableHttpMethods(Country.class, config, unsupportedActions);
-        disableHttpMethods(State.class, config, unsupportedActions);
+//        disableHttpMethods(Product.class, config, unsupportedActions);
+//        disableHttpMethods(ProductCategory.class, config, unsupportedActions);
+//        disableHttpMethods(Country.class, config, unsupportedActions);
+//        disableHttpMethods(State.class, config, unsupportedActions);
+        List.of(Product.class,
+                ProductCategory.class,
+                Country.class,
+                State.class).forEach(_class -> disableHttpMethods(_class, config, unsupportedActions));
 
         exposeIds(config);
     }
