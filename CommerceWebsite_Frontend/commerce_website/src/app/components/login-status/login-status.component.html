@@ -1,0 +1,4 @@
+<div class="login-status-header">
+    <button *ngIf="!isAuthenticated" routerLink="/login" class="au-btn-submit py-2">LogIn</button>
+     <button *ngIf="isAuthenticated" (click)="logout()" class="au-btn-submit py-2">LogOut</button>
+</div>
