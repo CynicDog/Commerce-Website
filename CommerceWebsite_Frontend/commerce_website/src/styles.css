@@ -229,7 +229,7 @@ section{
 }
 
 .au-input-xl{
-    min-width:935px
+    min-width:830px;
 }
 
 input.au-input.au-input-xl{
@@ -292,7 +292,10 @@ input.au-input.au-input-xl{
     display:flex
 }
 
-.au-btn-submit{
+.au-btn-submit{ 
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-right: 10px; 
     position:relative;
     right:0;
     min-width:95px;
@@ -906,13 +909,9 @@ footer ul li{
     }
 }
 
-@media (min-width:992px) and (max-width:1199px){
-    .cart-area i{
-        font-size:22px;
-        float:left;
-        margin-top:16px;
-        color:#839AA8;
-        margin-left:15px
+@media (min-width:992px) and (max-width:1060px){
+    .cart-area.d-n {
+        display:none; 
     }
     .header-mobile .header-mobile-bar{
         padding:10px 0;
@@ -924,8 +923,11 @@ footer ul li{
 }
 
 
-@media (max-width:991px){
-     .section-content-p30{
+@media (max-width:992px){
+    .au-btn-submit { 
+        display: none;
+    }
+    .section-content-p30{
         padding:0
     }
     .page-container{
@@ -958,7 +960,6 @@ footer ul li{
         text-align:center
     }
     .header-desktop{
-        position:relative;
         top:0;
         left:0;
         height:80px
@@ -1002,19 +1003,12 @@ footer ul li{
     header.header-desktop.extra{
         top:93px!important
     }
-    .cart-area i{
-        font-size:22px;
-        float:left;
-        margin-top:16px;
-        color:#839AA8;
-        margin-left:15px
-    }
-        .header-wrap2{
-        -webkit-box-pack:justify;
-        -webkit-justify-content:space-between;
-        -moz-box-pack:justify;
-        -ms-flex-pack:justify;
-        justify-content:space-between
+    .header-wrap2{
+    -webkit-box-pack:justify;
+    -webkit-justify-content:space-between;
+    -moz-box-pack:justify;
+    -ms-flex-pack:justify;
+    justify-content:space-between
     }
 }
 
@@ -1044,21 +1038,12 @@ footer ul li{
         top:64px!important
     }
     .header-desktop{
-        position:relative;
         top:0;
         left:0;
         height:80px
     }
     a.logo img{
         width:110px
-    }
-
-    .cart-area i{
-        font-size:22px;
-        float:left;
-        margin-top:16px;
-        color:#839AA8;
-        margin-left:15px
     }
     .footer-pagination{
         text-align:center
@@ -1091,13 +1076,6 @@ footer ul li{
     }
     .cart-area.d-n{
         display:none
-    }
-    .cart-area i{
-        font-size:18px;
-        float:left;
-        margin-top:16px;
-        color:#03a9f4;
-        margin-left:15px
     }
     .total span{
         display:inline-block;

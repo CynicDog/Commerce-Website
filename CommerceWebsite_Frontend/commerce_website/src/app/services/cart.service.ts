@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { REDIRECT_OAUTH_PARAMS_NAME } from '@okta/okta-auth-js';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { CartItem } from '../common/cart-item';
 
@@ -12,7 +13,18 @@ export class CartService {
   totalPrice: Subject<number> = new BehaviorSubject<number>(0); 
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0); 
 
-  constructor() { }
+  storage: Storage = sessionStorage; 
+
+  constructor() { 
+    
+    let data = JSON.parse(this.storage.getItem('cartItems')!); 
+
+    if (data != null) { 
+      this.cartItems = data; 
+
+      this.computeCartTotals(); 
+    }
+  }
 
   setQuantity(theCartItem: CartItem, quantity: number) {
 
@@ -65,6 +77,11 @@ export class CartService {
 
     this.totalPrice.next(totalPrice); 
     this.totalQuantity.next(totalQuantity); 
+
+    this.persistCartItems(); 
   }
 
+  persistCartItems() { 
+    this.storage.setItem('cartItems', JSON.stringify(this.cartItems)); 
+  }
 }
