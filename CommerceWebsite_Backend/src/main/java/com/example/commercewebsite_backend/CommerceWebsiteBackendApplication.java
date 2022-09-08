@@ -9,5 +9,4 @@ public class CommerceWebsiteBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(CommerceWebsiteBackendApplication.class, args);
     }
-
 }

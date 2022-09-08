@@ -5,6 +5,7 @@ import com.example.commercewebsite_backend.domain.Product;
 import com.example.commercewebsite_backend.domain.ProductCategory;
 import com.example.commercewebsite_backend.domain.State;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.core.mapping.ExposureConfigurer;
@@ -21,6 +22,9 @@ import java.util.Set;
 @Configuration
 public class RestConfig implements RepositoryRestConfigurer {
 
+    @Value("${allowed.origins}")
+    private String[] allowedOrigins;
+
     private EntityManager entityManager;
 
     @Autowired
@@ -36,19 +40,18 @@ public class RestConfig implements RepositoryRestConfigurer {
         HttpMethod[] unsupportedActions = {
                 HttpMethod.DELETE,
                 HttpMethod.POST,
-                HttpMethod.PUT
+                HttpMethod.PUT,
+                HttpMethod.PATCH
         };
 
-//        disableHttpMethods(Product.class, config, unsupportedActions);
-//        disableHttpMethods(ProductCategory.class, config, unsupportedActions);
-//        disableHttpMethods(Country.class, config, unsupportedActions);
-//        disableHttpMethods(State.class, config, unsupportedActions);
         List.of(Product.class,
                 ProductCategory.class,
                 Country.class,
                 State.class).forEach(_class -> disableHttpMethods(_class, config, unsupportedActions));
 
         exposeIds(config);
+
+        cors.addMapping(config.getBasePath() + "/**").allowedOrigins(allowedOrigins);
     }
 
     private void exposeIds(RepositoryRestConfiguration config) {
