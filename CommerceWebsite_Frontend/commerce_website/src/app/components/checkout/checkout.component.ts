@@ -143,33 +143,28 @@ export class CheckoutComponent implements OnInit {
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
 
     purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
-    const shippingState: State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
-    const shippingCountry: Country = JSON.parse(JSON.stringify(purchase.shippingAddress.country));
-    purchase.shippingAddress.state = shippingState.name;
-    purchase.shippingAddress.country = shippingCountry.name;
+    purchase.shippingAddress.state = JSON.parse(JSON.stringify(purchase.shippingAddress.state)).name;
+    purchase.shippingAddress.country = JSON.parse(JSON.stringify(purchase.shippingAddress.country)).name;
 
     purchase.billingAddress = this.checkoutFormGroup.controls['billingAddress'].value;
-    const billingState: State = JSON.parse(JSON.stringify(purchase.billingAddress.state));
-    const billingCountry: Country = JSON.parse(JSON.stringify(purchase.billingAddress.country));
-    purchase.billingAddress.state = billingState.name;
-    purchase.billingAddress.country = billingCountry.name;
+    purchase.billingAddress.state = JSON.parse(JSON.stringify(purchase.billingAddress.state)).name;
+    purchase.billingAddress.country = JSON.parse(JSON.stringify(purchase.billingAddress.country)).name;
 
     purchase.order = order;
     purchase.orderItems = orderItems;
 
-    if (this.checkoutFormGroup.valid) {
-      this.checkoutService.placeOrder(purchase).subscribe({
-        next: response => {
-          alert(`Your order has been successfully received.\nOrder tracking number: ${response.orderTrackingNumber}`);
+    // TODO: if (this.checkoutFormGroup.valid) {
+    this.checkoutService.placeOrder(purchase).subscribe({
+      next: response => {
+        alert(`Your order has been successfully received.\nOrder tracking number: ${response.orderTrackingNumber}`);
 
-          this.resetCart();
-        },
-        error: error => {
-          alert(`There happened to be an error: ${error.message}`);
-        }
+        this.resetCart();
+      },
+      error: error => {
+        alert(`There happened to be an error: ${error.message}`);
       }
-      )
-    }
+    })
+    // TODO: }
   }
 
   resetCart() {
