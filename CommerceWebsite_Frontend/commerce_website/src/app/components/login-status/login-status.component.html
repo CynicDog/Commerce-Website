@@ -1,5 +1,5 @@
 <div class="login-status-header">
     <button *ngIf="!isAuthenticated" routerLink="/login" class="au-btn-submit">LogIn</button>
     <button *ngIf="isAuthenticated" (click)="logout()" class="au-btn-submit">LogOut</button>
-    <button *ngIf="isAuthenticated" routerLink="/members" class="au-btn-submit">Member</button>
+    <button *ngIf="isAuthenticated" routerLink="/order-history" class="au-btn-submit" style="font-size:14px;">Purchased</button>
 </div>

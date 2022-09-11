@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormControlStatus, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
 import { Order } from 'src/app/common/order';
@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { CustomFormService } from 'src/app/services/custom-form.service';
 import { CustomValidators } from 'src/app/validators/custom-validators';
+import { __classPrivateFieldIn } from 'tslib';
 
 @Component({
   selector: 'app-checkout',
@@ -30,6 +31,10 @@ export class CheckoutComponent implements OnInit {
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
 
+  storage: Storage = sessionStorage;
+
+  formControlStatus: FormControlStatus;
+
   constructor(
     private formBuilder: FormBuilder,
     private cartService: CartService,
@@ -39,11 +44,13 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
 
+    const email = JSON.parse(this.storage.getItem("userEmail"));
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.notOnlyWhitespace]),
         lastName: new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.notOnlyWhitespace]),
-        email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
+        email: new FormControl(email, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
       }),
 
       shippingAddress: this.formBuilder.group({
@@ -126,8 +133,8 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.checkoutFormGroup.invalid) {
-      this.checkoutFormGroup.markAllAsTouched();
+    if (this.checkoutFormGroup.invalid) { 
+      this.checkoutFormGroup.markAllAsTouched(); 
     }
 
     let order = new Order();
@@ -142,6 +149,9 @@ export class CheckoutComponent implements OnInit {
 
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
 
+    console.log(this.checkoutFormGroup.controls['shippingAddress'].value);
+    console.log(this.checkoutFormGroup.controls['billingAddress'].value);
+
     purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
     purchase.shippingAddress.state = JSON.parse(JSON.stringify(purchase.shippingAddress.state)).name;
     purchase.shippingAddress.country = JSON.parse(JSON.stringify(purchase.shippingAddress.country)).name;
@@ -153,7 +163,7 @@ export class CheckoutComponent implements OnInit {
     purchase.order = order;
     purchase.orderItems = orderItems;
 
-    // TODO: if (this.checkoutFormGroup.valid) {
+    TODO: // if (this.checkoutFormGroup.valid) 
     this.checkoutService.placeOrder(purchase).subscribe({
       next: response => {
         alert(`Your order has been successfully received.\nOrder tracking number: ${response.orderTrackingNumber}`);
@@ -164,7 +174,6 @@ export class CheckoutComponent implements OnInit {
         alert(`There happened to be an error: ${error.message}`);
       }
     })
-    // TODO: }
   }
 
   resetCart() {

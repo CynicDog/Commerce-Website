@@ -10,7 +10,7 @@ import { State } from '../common/state';
 export class CustomFormService {
 
   private countryUrl = 'http://localhost:8080/api/countries';
-  private stateyUrl = 'http://localhost:8080/api/states';
+  private stateUrl = 'http://localhost:8080/api/states';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -23,7 +23,7 @@ export class CustomFormService {
 
   getStates(countryCode: string): Observable<State[]> { 
 
-    return this.httpClient.get<GetResponseStates>(this.stateyUrl + 
+    return this.httpClient.get<GetResponseStates>(this.stateUrl + 
       `/search/findByCountryCode?code=${countryCode}`).pipe(
       map(response => response._embedded.states)
     )
