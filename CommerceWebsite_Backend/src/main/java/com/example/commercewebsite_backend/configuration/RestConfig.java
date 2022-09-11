@@ -1,9 +1,6 @@
 package com.example.commercewebsite_backend.configuration;
 
-import com.example.commercewebsite_backend.domain.Country;
-import com.example.commercewebsite_backend.domain.Product;
-import com.example.commercewebsite_backend.domain.ProductCategory;
-import com.example.commercewebsite_backend.domain.State;
+import com.example.commercewebsite_backend.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -47,7 +44,8 @@ public class RestConfig implements RepositoryRestConfigurer {
         List.of(Product.class,
                 ProductCategory.class,
                 Country.class,
-                State.class).forEach(_class -> disableHttpMethods(_class, config, unsupportedActions));
+                State.class,
+                Order.class).forEach(_class -> disableHttpMethods(_class, config, unsupportedActions));
 
         exposeIds(config);
 

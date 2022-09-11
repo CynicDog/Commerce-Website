@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-// Configuration for RestController, which is different to Spring Data Rest.
+// Configuration for RestController, which is different from the one for Spring Data Rest.
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
 
