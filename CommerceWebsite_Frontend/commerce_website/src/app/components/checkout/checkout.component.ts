@@ -22,7 +22,7 @@ export class CheckoutComponent implements OnInit {
   checkoutFormGroup!: FormGroup;
 
   totalPrice: number = 0;
-  totalQuantity: number = 0;
+  totalQuantity: number = 0; 
 
   creditCardMonths: number[] = [];
   creditCardYears: number[] = [];

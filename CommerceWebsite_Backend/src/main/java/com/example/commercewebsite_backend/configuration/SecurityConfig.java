@@ -21,7 +21,10 @@ public class SecurityConfig {
                 .jwt();
 
         http.cors();
-        
+
+        http.csrf().disable();
+
         return http.build();
+
     }
 }
