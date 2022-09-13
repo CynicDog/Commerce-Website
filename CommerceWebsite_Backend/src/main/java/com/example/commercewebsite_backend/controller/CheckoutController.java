@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://localhost:4200")
 @RequestMapping("/api/checkout")
 public class CheckoutController {
 
