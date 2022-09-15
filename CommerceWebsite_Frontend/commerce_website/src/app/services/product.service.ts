@@ -4,13 +4,14 @@ import { Product } from '../common/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
 import { ProductCategory } from '../common/product-category';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private baseUrl = "http://localhost:8080/api/products"; 
+  private baseUrl = environment.hufsonian + "/products"; 
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,7 +26,7 @@ export class ProductService {
 
   getProductCategories(): Observable<ProductCategory[]> { 
 
-    const categoryUrl = "http://localhost:8080/api/productCategory"; 
+    const categoryUrl = environment.hufsonian + "/productCategory"; 
 
     return this.httpClient.get<GetResponseCategory>(categoryUrl).pipe(
       map(response => response._embedded.productCategory)
