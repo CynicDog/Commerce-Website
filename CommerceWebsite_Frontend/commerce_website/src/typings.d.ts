@@ -1,2 +1,2 @@
 declare var Stripe: any; 
-declare var slements: any; 
+declare var elements: any; 
