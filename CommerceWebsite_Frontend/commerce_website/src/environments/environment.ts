@@ -5,7 +5,8 @@
 export const environment = {
   
   production: false, 
-  hufsonian: "https://localhost:8443/api"
+  hufsonian: "https://localhost:8443/api",
+  stripePublishableKey: "pk_test_51LjJ8sBoyBNSztrGWYlT0ruMc0WTwarWybjT4Qq3suQtn1YYo4chlVPqMlPUogfu1xaAwD8ieUN45f5WhXuHaleN00bE92hjsd"
 };
 
 /*
