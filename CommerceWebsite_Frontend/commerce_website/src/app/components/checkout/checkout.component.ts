@@ -37,12 +37,15 @@ export class CheckoutComponent implements OnInit {
 
   formControlStatus: FormControlStatus;
 
+  // Stripe(publishableKey, options?) creates an instance of the `Stripe` object, which is an entrypoint to the rest of Stripe SDK. 
   stripe = Stripe(environment.stripePublishableKey);
 
   paymentInfo: PaymentInfo = new PaymentInfo();
 
   cardElement: any;
   displayError: any;
+
+  isDisabled: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -116,15 +119,19 @@ export class CheckoutComponent implements OnInit {
 
   setupStripePaymentForm() {
 
+    // stripe.elements(options?) method creates an `Elements` instance, which manages a group of elements. 
     var elements = this.stripe.elements();
 
+    // elements.create('payment', options?) creates an instance of the `Payment Element`. `Payment Element` is an embeddable component for securely collecting payment details.
     this.cardElement = elements.create('card', { hidePostalCode: true });
 
     this.cardElement.mount('#card-element');
 
+    // element.on() method is triggered when the `Element` is fully rendered and can accept event handler calls such as `change`, `ready`, `focus`, etc.
     this.cardElement.on('change', (event) => {
       this.displayError = document.getElementById('card-errors');
 
+      // `event.complete` is an event object properties whose boolean value is true if all required fields for the selected payment method have been filled with potentially valid inputs. 
       if (event.complete) { this.displayError.textContent = ""; }
       else if (event.error) { this.displayError.textContent = event.error.message; }
     });
@@ -168,25 +175,46 @@ export class CheckoutComponent implements OnInit {
     purchase.order = order;
     purchase.orderItems = orderItems;
 
-    this.paymentInfo.amount = this.totalPrice * 100;
+    this.paymentInfo.amount = Math.round(this.totalPrice * 100);
     this.paymentInfo.currency = "USD";
+    this.paymentInfo.receiptEmail = purchase.customer.email;
 
     if (!this.checkoutFormGroup.invalid && this.displayError.textContent === "") {
+
+      this.isDisabled = true; 
+
       this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
         (paymentIntentResponse) => {
-          this.stripe.confirmCardPayment(paymentIntentResponse.client_secret, { payment_method: { card: this.cardElement } }, { handleActions: false })
+          this.stripe.confirmCardPayment(paymentIntentResponse.client_secret,
+            {
+              payment_method: {
+                card: this.cardElement,
+                billing_details: {
+                  email: purchase.customer.email,
+                  name: `${purchase.customer.firstName} ${purchase.customer.lastName}`,
+                  address: {
+                    line1: purchase.billingAddress.street,
+                    city: purchase.billingAddress.city,
+                    state: purchase.billingAddress.state,
+                    postal_code: purchase.billingAddress.zipCode,
+                    country: this.billingAddressCountry.value.code
+                  }
+                }
+              }
+            }, { handleActions: false })
             .then(function (result) {
-              if (result.error) { alert(`There was an error: ${result.error.message}`); }
+              if (result.error) { alert(`There was an error: ${result.error.message}`); this.isDisabled = false; }
               else {
                 this.checkoutService.placeOrder(purchase).subscribe({
                   next: response => {
                     alert(`Your order has been received. Order Trackign Number: ${response.orderTrackingNumber}`);
                     this.resetCart();
+                    this.isDisabled = false;
                   },
-                  error: error => { alert(`There was an error: ${error}`); }
+                  error: error => { alert(`There was an error: ${error}`); this.isDisabled = false; }
                 })
               }
-            }.bind(this)); 
+            }.bind(this));
         }
       );
     } else { this.checkoutFormGroup.markAllAsTouched(); }
@@ -196,6 +224,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.cartItems = [];
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
+    this.cartService.persistCartItems();
 
     this.checkoutFormGroup.reset();
 
